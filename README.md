@@ -1,1 +1,1 @@
-This Repo Will Contain All The Code of My Learning Phase of Javascript
+It's an Basic GuessTheNumberGame i made during learning phase of JavaScript Basics.
