@@ -12,7 +12,7 @@
  */
 
 // Variable to store the list of guesses 
-
+let guesses = [];
 // Variable for store the correct random number 
 let correctNumber = getRandomNumber();
 
@@ -20,7 +20,7 @@ let correctNumber = getRandomNumber();
 window.onload = function() {
     document.getElementById("number-submit").addEventListener("click", playGame);
     document.getElementById("restart-game").addEventListener("click", initGame);
-    showYouWon();
+    
 }
 
 /**
@@ -29,6 +29,8 @@ window.onload = function() {
 function playGame(){
   let numberGuess = document.getElementById("number-guess").value;
   displayResult(numberGuess);
+  saveGuessHistory(numberGuess);
+  displayHistory();
 }
 
 /**
@@ -38,11 +40,11 @@ function playGame(){
 // *CODE GOES BELOW HERE *
 function displayResult(numberGuess){
   if(numberGuess > correctNumber){
-    console.log("Too HIGH");
+    showNumberAbove();
   } else if (numberGuess < correctNumber){
-      console.log("Too LOW");
+    showNumberBelow();
   } else if (numberGuess == correctNumber){
-    console.log("is correct");
+    showYouWon();
   }
 }
 
@@ -79,6 +81,7 @@ function getRandomNumber(){
  * HINT: Use the guesses variable
  */
 function saveGuessHistory(guess) {
+  guesses.push(guess);
   // *CODE GOES BELOW HERE *
 }
 
@@ -91,9 +94,14 @@ function saveGuessHistory(guess) {
  * HINT: use while loop and string concatentation to create a list of guesses
  */
 function displayHistory() {
-  let index; // TODO
+  let index = guesses.length - 1; // TODO
   let list = "<ul class='list-group'>";
   // *CODE GOES BELOW HERE *
+  while(index >= 0){
+    list += "<li class='list-group-item'>" +
+    "You Guessed " + guesses[index] + "</li>";
+    index-=1;
+  }
   list += '</ul>'
   document.getElementById("history").innerHTML = list;
 }
@@ -127,7 +135,6 @@ function showYouWon(){
    */
   // *CODE GOES BELOW HERE *
   let dialog = getDialog('won', text);
-  console.log(dialog);
   document.getElementById("result").innerHTML = dialog;
 }
 
